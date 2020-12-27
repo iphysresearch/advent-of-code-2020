@@ -23,3 +23,8 @@ l = np.loadtxt('2020_day1.dat')
 # what is the product of the three entries that sum to 2020?
 [ i * j * k  for i in l for j in l for k in l if (i > j > k) and (i+j+k == 2020)]
 ```
+
+
+## Ref
+
+- [Awesome Advent of Code](https://github.com/Bogdanp/awesome-advent-of-code)
