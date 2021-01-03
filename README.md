@@ -9,6 +9,7 @@ My solutions for the yearly Advent of Code challenge only Python/Numpy/Pandas.
 
 - [Day 1](#day1)
 - [Day 2](#day2)
+- [Day 3](#day3)
 
 ## day1
 
@@ -58,6 +59,32 @@ def parsing(x):
         return False
 df.Value.map(parsing).value_counts()[True] # My answer
 ```
+
+## day3
+
+```python
+import pandas as pd
+import numpy as np
+df = pd.read_csv('2020_day3.dat', header=None, names=['Value'])
+data = df.Value.map(lambda x: [int(i) for i in list(x.replace('.','0').replace('#','1'))])
+Answer = lambda Right, down: sum([np.roll(data.iloc[i], -1*Right*index)[0] for index, i in enumerate(np.arange(data.size)[::down]) if i] )
+
+# Part 1
+# The same pattern repeats to the right many times for each row.
+# Starting at the top-left corner of your map and following a slope of right 3 and down 1, how many trees (`#`) would you encounter?
+Answer(3,1) # My answer
+
+# Part 2
+# Determine the number of trees you would encounter if, for each of the following slopes, you start at the top-left corner and traverse the map all the way to the bottom:
+# - Right 1, down 1.
+# - Right 3, down 1. (This is the slope you already checked in Part 1.)
+# - Right 5, down 1.
+# - Right 7, down 1.
+# - Right 1, down 2.
+# What do you get if you multiply together the number of trees (`#`) encountered on each of the listed slopes?
+Answer(1,1) * Answer(3,1) * Answer(5,1) * Answer(7,1) * Answer(1,2)  # My answer
+```
+
 ## Ref
 
 - [Awesome Advent of Code](https://github.com/Bogdanp/awesome-advent-of-code)
